@@ -1,4 +1,5 @@
-%using Matlab2017a
+%using Matlab2017a  
+%(a section from TechMain.m)
 %% %=====23.5. (only for log: desc+top10) literal portion of gold standard and desc in one figure
  
 sqlstrParamed_desc = strcat('select avg(litNum), avg(littypeNum), avg(totalTNum-littypeNum), avg(totalTNum) '...
@@ -57,7 +58,11 @@ for kid=2%1%1:2
         barVal=[barVal; valVec]
     end
 fig=figure;
-h1=bar(barVal,'stacked');% draw figure
+h1=bar(barVal,'stacked');%====== draw figure, 
+%====  barVal is a matrix, each row corresponding to one stacked bar, 
+%====  each column corresponding to length of a stack in the bar,
+%====  groups are seperated by a zero-valued row;
+
 
 set(gca,'xticklabel',typeNamesDisplay);
 legend({'Literal','Type','Resource'});
@@ -67,10 +72,12 @@ width=1200;%800;
 height=400;%300;
 set(fig, 'Position', [0, 0, width, height]);
 set(gca,'XLim',[0 21],'XTick',1.5:3:21,'XTickLabel',typeNamesDisplay);   %======# Modify axes
+%==== 'XLim' sets the length of the x-axes;
+%==== 'XTick' sets the position of xticklabels;
 
 
-set(0,'DefaultAxesFontName', defaultFontName);
-set(findall(gcf,'type','axes'),'fontsize',defaultFontSize);
+
+set(findall(gcf,'type','axes'),'fontsize',defaultFontSize);  % set fonsize
 set(findall(gcf,'type','text'),'fontSize',defaultFontSize) ;
 % saveas(gcf,strcat('D:/work/matlabworkspace/esumm/evalFig/figs/tech-one_litnum_',topk),'epsc');
 % saveas(gcf,strcat('D:/work/matlabworkspace/esumm/evalFig/figs/tech-one_litnum_',topk),'fig');
